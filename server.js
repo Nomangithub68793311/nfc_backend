@@ -1,9 +1,11 @@
-process.env.UV_THREADPOOL_SIZE = 5;
+// process.env.UV_THREADPOOL_SIZE = 5;
 
 const express = require('express');
 const mongoose = require('mongoose')
 var cors = require('cors')
 const app = express();
+const dotenv = require('dotenv')
+dotenv.config()
 const router = require('./routes/authroute');
 
 const { mongouri } = require('./config/keys')
@@ -19,7 +21,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('got it')
 })
-mongoose.connect(mongouri, {
+mongoose.connect('mongodb://ranaDatabase:ahmedimran96yoo@ac-nql5qlw-shard-00-00.xer9vl6.mongodb.net:27017,ac-nql5qlw-shard-00-01.xer9vl6.mongodb.net:27017,ac-nql5qlw-shard-00-02.xer9vl6.mongodb.net:27017/myfirstdatabase?ssl=true&replicaSet=atlas-o00q1f-shard-0&authSource=admin&retryWrites=true&w=majority', {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
 }).then((result) => {
     console.log('mongo connected');

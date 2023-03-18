@@ -18,7 +18,8 @@ const Product = require('../models/Product')
 const GetProduct = require('../models/GetProduct')
 const Social = require('../models/Userlink')
 const jwt = require('jsonwebtoken');
-const { jwtKey, API_KEY, STRIPE_KEY, WEB_HOOK_SECRET } = require('../config/keys')
+const { API_KEY, STRIPE_KEY, WEB_HOOK_SECRET } = require('../config/keys')
+const jwtKey = 'let go for a walk'
 const stripe = require("stripe")(STRIPE_KEY)
 const checkuser = require('../middleware/checkUser')
 
