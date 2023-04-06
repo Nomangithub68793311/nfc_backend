@@ -496,9 +496,11 @@ module.exports.profile_editlink_post = (req, res) => {
 
 
 module.exports.update_profile_bio__post = async (req, res) => {
-    // const id=req.user._id;
+    const id = req.user._id;
     // const {id}=req.body
-    const { bio, id, pic, address, city, zipcode, state, country } = req.body;
+    const { bio, pic, address, city, zipcode, state, country } = req.body;
+    // return res.status(200).json({ bioData: "bioData" })
+
     const user = await User.findById(id)
 
     try {
@@ -514,14 +516,14 @@ module.exports.update_profile_bio__post = async (req, res) => {
         // user.addesss=bioDataa.address+`${" "}`+bioDataa.city+`${" "}`+bioDataa.zipcode+`${" "}`+bioDataa.state+`${" "}`+bioDataa.country
         await user.save();
         const bioData = await Bio.findById(bioDataa._id).select("bio,address,city,zipcode,state,country,pic,postedBy").populate("postedBy", "fullname email")
-        res.status(200).json({ bioData: bioData })
+        return res.status(200).json({ bioData: bioData })
 
 
 
     }
     catch (err) {
 
-        res.status(422).json({ error: err })
+        return res.status(422).json({ error: err })
         //   res.send(err.code)
     }
 }
